@@ -1,5 +1,5 @@
 -- 1. Setup Mason core
-require("mason").setup({
+require('mason').setup({
   ui = {
     icons = {
       package_pending = ' ',
@@ -9,8 +9,7 @@ require("mason").setup({
   },
 })
 
-require("mason-lspconfig").setup({
-  ensure_installed = { "svelte" },
-  automatic_enable = true, 
+require('mason-lspconfig').setup({
+  ensure_installed = { 'svelte', 'glsl_analyzer' },
+  automatic_enable = true,
 })
-

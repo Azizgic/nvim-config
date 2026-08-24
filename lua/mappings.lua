@@ -18,7 +18,7 @@ map('n', '<leader>s', '<cmd>w<CR>', { desc = 'general save file', remap = true }
 map('n', '<C-c>', '<cmd>%y+<CR>', { desc = 'general copy whole file' })
 
 map({ 'n', 'x' }, '<leader>cf', function()
-  require('conform').format({ lsp_fallback = true })
+  require('conform').format({ async = true})--lsp_fallback = true --})
 end, { desc = 'general format file' })
 
 -- global lsp mappings
@@ -93,3 +93,39 @@ map('n', '<leader>wK', '<cmd>WhichKey <CR>', { desc = 'whichkey all keymaps' })
 map('n', '<leader>wk', function()
   vim.cmd('WhichKey ' .. vim.fn.input('WhichKey: '))
 end, { desc = 'whichkey query lookup' })
+
+map("n", "<leader>zn", "<Cmd>ZkNew<CR>", { desc = "New note" })
+map("n", "<leader>zf", "<Cmd>ZkNotes<CR>", { desc = "Find notes" })
+map("n", "<leader>zb", "<Cmd>ZkBacklinks<CR>", { desc = "Backlinks" })
+map("n", "<leader>zl", "<Cmd>ZkLinks<CR>", { desc = "Links" })
+map("v", "<leader>zt", ":'<,'>ZkNewFromTitleSelection<CR>", { desc = "New note from selection" })
+
+-- Trouble navigation (when Trouble window is open)
+map('n', ']t', function()
+  require('trouble').next({ skip_groups = true, jump = true })
+end, { desc = 'Next trouble item' })
+
+map('n', '[t', function()
+  require('trouble').previous({ skip_groups = true, jump = true })
+end, { desc = 'Previous trouble item' })
+
+-- Flash alternative mappings
+map('n', '<leader>fj', function()
+  require('flash').jump({
+    search = { mode = 'search', max_length = 0 },
+    label = { after = { 0, 0 } },
+    pattern = '^',
+  })
+end, { desc = 'Flash Jump to line' })
+
+map('o', 'f', function()
+  require('flash').jump({
+    search = { mode = 'search', max_length = 0 },
+    label = { after = { 0, 0 } },
+    pattern = '^',
+  })
+end, { desc = 'Flash line jump' })
+
+map('o', 'F', function()
+  require('flash').treesitter()
+end, { desc = 'Flash treesitter jump' })

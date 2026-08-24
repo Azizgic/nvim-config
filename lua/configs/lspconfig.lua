@@ -25,16 +25,11 @@ end
 
 -- disable semanticTokens
 M.on_init = function(client, _)
-  if vim.fn.has('nvim-0.11') ~= 1 then
-    if client.supports_method('textDocument/semanticTokens') then
-      client.server_capabilities.semanticTokensProvider = nil
-    end
-  else
-    if client:supports_method('textDocument/semanticTokens') then
-      client.server_capabilities.semanticTokensProvider = nil
-    end
-  end
+  client.server_capabilities.semanticTokensProvider = nil
 end
+
+-- Remove the root_dir override - lspconfig handles this better
+-- Delete M.root_dir function
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
@@ -100,5 +95,15 @@ vim.lsp.config('svelte', {
   end,
 })
 vim.lsp.enable('svelte')
+
+-- Add this to your existing lspconfig
+vim.lsp.config('glsl_analyzer', {
+  cmd = { 'glsl_analyzer' },
+  filetypes = { 'glsl', 'javascript', 'typescript' }, -- Include JS/TS for Otter
+  root_dir = function(fname)
+    return require('lspconfig.util').root_pattern('.git', 'package.json')(fname)
+  end,
+})
+vim.lsp.enable('glsl_analyzer')
 
 return M
