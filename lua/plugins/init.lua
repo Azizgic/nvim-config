@@ -261,9 +261,17 @@ return {
     cmd = { 'Trouble', 'TroubleToggle', 'TroubleRefresh' },
     keys = {
       { '<leader>xx', '<cmd>Trouble diagnostics toggle<CR>', desc = 'Diagnostics (Trouble)' },
-      { '<leader>xX', '<cmd>Trouble diagnostics toggle filter.buf=0<CR>', desc = 'Buffer Diagnostics (Trouble)' },
+      {
+        '<leader>xX',
+        '<cmd>Trouble diagnostics toggle filter.buf=0<CR>',
+        desc = 'Buffer Diagnostics (Trouble)',
+      },
       { '<leader>cs', '<cmd>Trouble symbols toggle<CR>', desc = 'Symbols (Trouble)' },
-      { '<leader>cl', '<cmd>Trouble lsp toggle<CR>', desc = 'LSP Definitions/References (Trouble)' },
+      {
+        '<leader>cl',
+        '<cmd>Trouble lsp toggle<CR>',
+        desc = 'LSP Definitions/References (Trouble)',
+      },
       { '<leader>xL', '<cmd>Trouble loclist toggle<CR>', desc = 'Location List (Trouble)' },
       { '<leader>xQ', '<cmd>Trouble qflist toggle<CR>', desc = 'Quickfix List (Trouble)' },
     },
@@ -282,8 +290,18 @@ return {
     priority = 1000,
     opts = {
       ensure_installed = {
-        'lua', 'python', 'javascript', 'typescript', 'svelte',
-        'html', 'css', 'json', 'yaml', 'markdown', 'vim', 'vimdoc',
+        'lua',
+        'python',
+        'javascript',
+        'typescript',
+        'svelte',
+        'html',
+        'css',
+        'json',
+        'yaml',
+        'markdown',
+        'vim',
+        'vimdoc',
       },
       auto_install = true,
       highlight = { enable = true },
@@ -328,6 +346,10 @@ return {
     'stevearc/conform.nvim',
     opts = {
       formatters_by_ft = {
+        javascript = { 'prettier' },
+        typescript = { 'prettier' },
+        javascriptreact = { 'prettier' },
+        typescriptreact = { 'prettier' },
         lua = { 'stylua' },
         python = { 'black' },
       },
